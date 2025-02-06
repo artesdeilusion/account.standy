@@ -14,10 +14,14 @@ import {
     DialogContent,
     DialogActions,
     CircularProgress,
-    Container,Card
+    Container,
+    Card,
+    IconButton
 } from '@mui/material';
 import "@/app/globals.css";
 import Navbar from '@/components/navbar';
+import CloseIcon from '@mui/icons-material/Close';
+
 const StyledCard = styled(Card)({
     backgroundColor: '#313031',
     color: '#fff',
@@ -25,6 +29,7 @@ const StyledCard = styled(Card)({
     padding: '16px',
     marginBottom: '16px',
   });
+
 const DeleteAccount = () => {
     const router = useRouter();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -82,61 +87,70 @@ const DeleteAccount = () => {
             }}>
 
                 <StyledCard>  
-                <Typography variant="h5" gutterBottom>
-                    Hesabı Sil
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 3 }}>
-                    Hesabınızı silmek üzeresiniz. Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.
-                </Typography>
-                {error && (
-                    <Typography color="error" sx={{ mb: 2 }}>
-                        {error}
-                    </Typography>
-                )}
-                <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleDeleteRequest}
-                    disabled={isDeleting}
-                    sx={{
-                         color: '#fff',
-                        textTransform: 'none',
-                        fontWeight: 'bold',
-                        borderRadius: '20px'
-                    }}
-                >
-                    Hesabımı Sil
-                </Button>
-
-                <Dialog
-
-                    open={isDialogOpen}
-                     
-                    onClose={handleCancelDelete}
-                >
-                    <DialogTitle>
-                        Hesabınızı silmek istediğinizden emin misiniz?
-                    </DialogTitle>
-                    <DialogContent>
-                        <Typography>
-                            Bu işlem geri alınamaz. Tüm verileriniz kalıcı olarak silinecektir.
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                        <Typography variant="h5">
+                            Hesabı Sil
                         </Typography>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCancelDelete} disabled={isDeleting}>
-                            İptal
-                        </Button>
-                        <Button 
-                            onClick={handleConfirmDelete} 
- 
-                            color="error" 
-                            disabled={isDeleting}
-                            startIcon={isDeleting ? <CircularProgress size={20} /> : null}
+                        <IconButton
+                            onClick={() => router.back()}
+                            sx={{ color: '#fff' }}
+                            aria-label="close"
                         >
-                            {isDeleting ? 'Siliniyor...' : 'Evet, Sil'}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+                    <Typography variant="body1" sx={{ mb: 3 }}>
+                        Hesabınızı silmek üzeresiniz. Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.
+                    </Typography>
+                    {error && (
+                        <Typography color="error" sx={{ mb: 2 }}>
+                            {error}
+                        </Typography>
+                    )}
+                    <Button
+                        variant="contained"
+                        color="error"
+                        onClick={handleDeleteRequest}
+                        disabled={isDeleting}
+                        sx={{
+                             color: '#fff',
+                            textTransform: 'none',
+                            fontWeight: 'bold',
+                            borderRadius: '20px'
+                        }}
+                    >
+                        Hesabımı Sil
+                    </Button>
+
+                    <Dialog
+
+                        open={isDialogOpen}
+                         
+                        onClose={handleCancelDelete}
+                    >
+                        <DialogTitle>
+                            Hesabınızı silmek istediğinizden emin misiniz?
+                        </DialogTitle>
+                        <DialogContent>
+                            <Typography>
+                                Bu işlem geri alınamaz. Tüm verileriniz kalıcı olarak silinecektir.
+                            </Typography>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleCancelDelete} disabled={isDeleting}>
+                                İptal
+                            </Button>
+                            <Button 
+                                onClick={handleConfirmDelete} 
+
+                                color="error" 
+                                disabled={isDeleting}
+                                startIcon={isDeleting ? <CircularProgress size={20} /> : null}
+                            >
+                                {isDeleting ? 'Siliniyor...' : 'Evet, Sil'}
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </StyledCard>
             </Box>
             </Container>

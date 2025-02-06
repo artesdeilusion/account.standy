@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "@/app/globals.css";
 import { auth } from '../firebase'; // Ensure this path is correct
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -12,7 +12,7 @@ import {
   Box,
   Button,
   FormControl,
-  Link,
+
   TextField,
   Typography,
   Stack,
@@ -83,39 +83,78 @@ export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
-  const validateInputs = () => {
-    let isValid = true;
+  useEffect(() => {
+    // Check if user is already logged in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, redirect to home page
+        router.push('/');
+      }
+    });
 
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    // Cleanup subscription
+    return () => unsubscribe();
+  }, [router]);
+
+  const validateInputs = async () => {
+    setEmailError(false);
+    setPasswordError(false);
+    setErrorMessage('');
+
+    const emailValue = email.trim();
+    const passwordValue = password.trim();
+
+    // Email validation
+    if (!emailValue) {
       setEmailError(true);
-      isValid = false;
-    } else {
-      setEmailError(false);
+      setErrorMessage('E-posta adresi boş olamaz.');
+      return false;
     }
 
-    if (!password || password.length < 6) {
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailValue)) {
+      setEmailError(true);
+      setErrorMessage('Geçerli bir e-posta adresi giriniz.');
+      return false;
+    }
+
+    // Password validation
+    if (!passwordValue) {
       setPasswordError(true);
-      isValid = false;
-    } else {
-      setPasswordError(false);
+      setErrorMessage('Parola boş olamaz.');
+      return false;
     }
 
-    return isValid;
+    return true;
   };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMessage('');
 
-    if (!validateInputs()) return;
+    if (!await validateInputs()) return;
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/'); // Redirect on success
-    } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message); // Show Firebase auth errors
+    } catch (error: any) {
+      // Convert Firebase error messages to Turkish
+      let turkishError = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+      
+      switch (error.code) {
+        case 'auth/user-not-found':
+          turkishError = 'Bu e-posta adresi ile bir hesap bulunmadı.';
+          break;
+        case 'auth/wrong-password':
+          turkishError = 'Hatalı parola.';
+          break;
+        case 'auth/invalid-email':
+          turkishError = 'Geçersiz e-posta adresi.';
+          break;
+        case 'auth/too-many-requests':
+          turkishError = 'Çok fazla başarısız giriş denemesi. Lütfen daha sonra tekrar deneyin.';
+          break;
       }
+      
+      setErrorMessage(turkishError);
     }
   };
 
@@ -173,13 +212,19 @@ export default function SignIn() {
                 </StyledFormControl>
 
                 {errorMessage && (
-                  <Typography 
-                    color="error" 
-                    variant="body2" 
-                    sx={{ textAlign: 'center', mb: 2 }}
+                  <StyledCard 
+                    sx={{ 
+                      backgroundColor: '#ff1744',
+                      color: 'white',
+                      mb: 2,
+                      p: 1.5,
+                      textAlign: 'center'
+                    }}
                   >
-                    {errorMessage}
-                  </Typography>
+                    <Typography variant="body1">
+                      {errorMessage}
+                    </Typography>
+                  </StyledCard>
                 )}
 
                 <StyledButton 

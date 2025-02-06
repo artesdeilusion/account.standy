@@ -11,11 +11,13 @@ import {
     Alert,
     CircularProgress,
     Container,
-    Card
+    Card,
+    IconButton
 } from '@mui/material';
 import Navbar from '@/components/navbar';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
+import CloseIcon from '@mui/icons-material/Close';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 const StyledCard = styled(Card)({
@@ -85,9 +87,18 @@ const ChangePassword = () => {
             <Container maxWidth="md" sx={{ paddingTop: '20', padding: '16px', bgcolor: '#121212' }}>  
                 <Box sx={{ minHeight: '100vh', color: '#fff' }}>
                     <StyledCard>  
-                        <Typography variant="h5" gutterBottom>
-                            Parola Değiştir
-                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                            <Typography variant="h5">
+                                Parola Değiştir
+                            </Typography>
+                            <IconButton
+                                onClick={() => router.back()}
+                                sx={{ color: '#fff' }}
+                                aria-label="close"
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        </Box>
                         
                         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
                         {success && <Alert severity="success" sx={{ mb: 2 }}>Parola başarıyla değiştirildi!</Alert>}

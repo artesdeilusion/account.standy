@@ -9,11 +9,13 @@ import {
     Button,
     Alert,
     CircularProgress,
+    IconButton,
 } from '@mui/material';
 import Navbar from '@/components/navbar';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import { useRouter } from 'next/navigation';
+import CloseIcon from '@mui/icons-material/Close';
 
 const StyledCard = styled(Card)({
     backgroundColor: '#313031',
@@ -73,9 +75,18 @@ const Profile = () => {
             <Navbar />
             <Box  maxWidth="md" margin="auto" sx={{ paddingTop: '20', padding: '16px' }}>
             <StyledCard> 
-                <Typography variant="h5" gutterBottom>
-                    Profili Düzenle
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                    <Typography variant="h5">
+                        Profili Düzenle
+                    </Typography>
+                    <IconButton
+                        onClick={() => router.back()}
+                        sx={{ color: '#fff' }}
+                        aria-label="close"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </Box>
 
                 {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
                 {success && <Alert severity="success" sx={{ mb: 2 }}>Profil başarıyla güncellendi!</Alert>}
