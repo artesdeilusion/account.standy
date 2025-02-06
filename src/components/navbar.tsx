@@ -52,7 +52,7 @@ function StandyAppBar() {
   }, [router]);
 
   if (!user && router.pathname === '/login') {
-    return null; // Don't show navbar on login page
+    return null;
   }
 
   return (
