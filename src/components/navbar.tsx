@@ -52,7 +52,7 @@ function StandyAppBar() {
   }, [router]);
 
   if (!user && router.pathname === '/login') {
-    return null;
+    return null; 
   }
 
   return (
@@ -63,7 +63,7 @@ function StandyAppBar() {
             <Link href="/">
               <Image
                 src="/standy.svg"
-                alt="Standy Logo"
+                alt="Standy Logo "
                 width={120}
                 height={120}
               />
