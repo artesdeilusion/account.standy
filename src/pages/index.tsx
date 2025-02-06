@@ -195,7 +195,9 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                     </StyledCard>
                 </Box>
             ) : (
-                <p>Loading user information...</p>
+                <div className="h-screen flex items-center justify-center">
+                    <CircularProgress sx={{ color: 'white' }} />
+                </div>
             )}
                     <Footer />
 
