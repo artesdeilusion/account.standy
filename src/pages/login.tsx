@@ -5,11 +5,12 @@ import { auth } from '../firebase'; // Ensure this path is correct
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import {
   Box,
   Button,
-  CssBaseline,
   FormControl,
   Link,
   TextField,
@@ -62,6 +63,18 @@ const StyledButton = styled(Button)({
   }
 });
 
+// Create a custom theme with your desired primary color.
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#D81B60', // Set your desired primary color here
+    },
+    secondary: {
+      main: '#C2185B', // Optionally, set a custom secondary color
+    },
+  },
+});
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -107,87 +120,89 @@ export default function SignIn() {
   };
 
   return (
-    <div className="bg-[#121212]">
-      <title>Standy | Oturum Aç</title>
-      <CssBaseline enableColorScheme />
-      <PageContainer direction="column" justifyContent="center">
-        <Box maxWidth="md" sx={{ width: '100%', maxWidth: 450 }}>
-          <StyledCard variant="outlined">
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2,mb:1}}>
-              <Avatar sx={{ bgcolor: '#D81B60', width: 45, height: 45 }}>
-                <Image src="/standylogo.png" alt="logo" width={45} height={45} />
-              </Avatar>
-            </Box>
-            <Typography component="h1" variant="h4" sx={{ textAlign: 'center', mb: 2 }}>
-              Standy&apos;de oturum aç
-            </Typography>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="bg-[#121212]">
+        <title>Standy | Oturum Aç</title>
+        <PageContainer direction="column" justifyContent="center">
+          <Box maxWidth="md" sx={{ width: '100%', maxWidth: 450 }}>
+            <StyledCard variant="outlined">
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2,mb:1}}>
+                <Avatar sx={{ bgcolor: '#D81B60', width: 45, height: 45 }}>
+                  <Image src="/standylogo.png" alt="logo" width={45} height={45} />
+                </Avatar>
+              </Box>
+              <Typography component="h1" variant="h4" sx={{ textAlign: 'center', mb: 2 }}>
+                Standy&apos;de oturum aç
+              </Typography>
 
-            <Box component="form" onSubmit={handleLogin} noValidate sx={{ display: 'flex', flexDirection: 'column' }}>
-              <StyledFormControl>
-                <StyledTextField
-                  error={emailError}
-                  helperText={emailError ? 'Geçerli bir e-posta adresi girin' : ''}
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="E-posta adresi"
-                  autoComplete="email"
-                  required
-                  fullWidth
-                  size="medium"
-                  label="E-posta adresi"
-                  margin="dense"
-                />
-              </StyledFormControl>
+              <Box component="form" onSubmit={handleLogin} noValidate sx={{ display: 'flex', flexDirection: 'column' }}>
+                <StyledFormControl>
+                  <StyledTextField
+                    color="secondary"
+                    error={emailError}
+                    helperText={emailError ? 'Geçerli bir e-posta adresi girin' : ''}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="E-posta adresi"
+                    autoComplete="email"
+                    required
+                    fullWidth
+                    size="medium"
+                    label="E-posta adresi"
+                    margin="dense"
+                  />
+                </StyledFormControl>
 
-              <StyledFormControl>
-                <StyledTextField
-                  error={passwordError}
-                  helperText={passwordError ? 'Parola en az 6 karakter olmalıdır' : ''}
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Parola"
-                  autoComplete="current-password"
-                  required
-                  fullWidth
-                  size="medium"
-                  label="Parola"
-                  margin="dense"
-                />
-              </StyledFormControl>
+                <StyledFormControl>
+                  <StyledTextField
+                    error={passwordError}
+                    helperText={passwordError ? 'Parola en az 6 karakter olmalıdır' : ''}
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Parola"
+                    autoComplete="current-password"
+                    required
+                    fullWidth
+                    size="medium"
+                    label="Parola"
+                    margin="dense"
+                  />
+                </StyledFormControl>
 
-              {errorMessage && (
-                <Typography 
-                  color="error" 
-                  variant="body2" 
-                  sx={{ textAlign: 'center', mb: 2 }}
+                {errorMessage && (
+                  <Typography 
+                    color="error" 
+                    variant="body2" 
+                    sx={{ textAlign: 'center', mb: 2 }}
+                  >
+                    {errorMessage}
+                  </Typography>
+                )}
+
+                <StyledButton 
+                  type="submit" 
+                  variant="contained" 
+                  disabled={!email || !password}
+                  sx={{  alignSelf: 'center', width: 'auto' }}
                 >
-                  {errorMessage}
-                </Typography>
-              )}
+                  Oturum Aç
+                </StyledButton>
 
-              <StyledButton 
-                type="submit" 
-                fullWidth 
-                variant="contained" 
-                disabled={!email || !password}
-                sx={{ mb: 2 }}
-              >
-                Oturum Aç
-              </StyledButton>
-
-             
-            </Box>
-          </StyledCard>
-        </Box>
-    
-        <footer>
-        <p>
-          &copy; {new Date().getFullYear()} Artes de ilusion. Tüm hakları saklıdır.
-        </p>
-      </footer>  </PageContainer>
-    
-    </div>
+               
+              </Box>
+            </StyledCard>
+          </Box>
+      
+          <footer>
+          <p>
+            &copy; {new Date().getFullYear()} Artes de ilusion. Tüm hakları saklıdır.
+          </p>
+        </footer>  </PageContainer>
+      
+      </div>
+    </ThemeProvider>
   );
 }

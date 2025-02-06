@@ -184,7 +184,7 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                             <ListItem 
                                 component="li" 
                                 disablePadding 
-                                onClick={() => window.open('http://help.standyroutes.com/', '_blank')}
+                                onClick={() => window.open('https://help.standyroutes.com/', '_blank')}
                             >
                                 <ListItemButton>
                                     <ListItemIcon><HelpOutline sx={{ color: '#fff' }} /></ListItemIcon>
@@ -196,7 +196,7 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                 </Box>
             ) : (
                 <div className="h-screen flex items-center justify-center">
-                    <CircularProgress sx={{ color: 'white' }} />
+
                 </div>
             )}
                     <Footer />
