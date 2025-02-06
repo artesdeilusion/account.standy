@@ -15,7 +15,6 @@ import {PersonOutline } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
-import { Barlow_Condensed } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/dist/client/link';
 

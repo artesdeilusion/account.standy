@@ -43,9 +43,7 @@ const SectionTitle = styled(Typography)({
 
 const Home: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
-    const [subscription, setSubscription] = useState<any>(null);
-    const [paymentHistory, setPaymentHistory] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
@@ -66,8 +64,7 @@ const Home: React.FC = () => {
     const loadSubscriptionDetails = async (uid: string) => {
         try {
             const subscriptionData = await fetchSubscriptionDetails(uid);
-            setSubscription(subscriptionData);
-        } catch (error) {
+         } catch (error) {
             console.error("Failed to load subscription details:", error);
             setError("Unable to load subscription details.");
         }
@@ -76,37 +73,13 @@ const Home: React.FC = () => {
     const loadPaymentHistory = async (uid: string) => {
         try {
             const history = await fetchPaymentHistory(uid);
-            setPaymentHistory(Array.isArray(history) ? history : []);
-        } catch (error) {
+         } catch (error) {
             console.error("Failed to load payment history:", error);
             setError("Unable to load payment history.");
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            router.push('/login');
-        } catch (error) {
-            console.error("Error logging out:", error);
-            setError("Logout failed. Please try again.");
-        }
-    };
-
-    const handleDeleteAccount = async () => {
-        if (user) {
-            try {
-                await deleteUserData(user.uid);
-                await user.delete();
-                alert("Account deleted successfully!");
-                router.push('/');
-            } catch (error) {
-                console.error("Failed to delete account:", error);
-                setError("Unable to delete account. Please try again.");
-            }
-        }
-    };
-
+ 
     const navigateToPage = (path: string) => {
         router.push(path);
     };
