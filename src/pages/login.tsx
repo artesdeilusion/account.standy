@@ -197,7 +197,7 @@ export default function SignIn() {
           </Box>
       
           <footer>
-          <p>
+          <p className='text-center text-sm text-gray-500'>
             &copy; {new Date().getFullYear()} Artes de ilusion. Tüm hakları saklıdır.
           </p>
         </footer>  </PageContainer>
