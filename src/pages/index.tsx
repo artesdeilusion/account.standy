@@ -1,14 +1,13 @@
 import "@/app/globals.css";
 import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase'; // Adjust the import path as needed
-import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router'; // Assuming you're using Next.js
 import { User } from 'firebase/auth'; // Firebase User type import
 import {
     fetchSubscriptionDetails,
      fetchPaymentHistory,
-     deleteUserData
-} from './api/api'; // Adjust path as needed
+} 
+from './api/api'; // Adjust path as needed
 import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, } from "@mui/icons-material";
 import Navbar from "@/components/navbar";
 import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
@@ -63,8 +62,7 @@ const Home: React.FC = () => {
 
     const loadSubscriptionDetails = async (uid: string) => {
         try {
-            const subscriptionData = await fetchSubscriptionDetails(uid);
-         } catch (error) {
+          } catch (error) {
             console.error("Failed to load subscription details:", error);
             setError("Unable to load subscription details.");
         }
@@ -72,8 +70,7 @@ const Home: React.FC = () => {
 
     const loadPaymentHistory = async (uid: string) => {
         try {
-            const history = await fetchPaymentHistory(uid);
-         } catch (error) {
+          } catch (error) {
             console.error("Failed to load payment history:", error);
             setError("Unable to load payment history.");
         }
