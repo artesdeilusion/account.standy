@@ -177,24 +177,17 @@ export default function SignIn() {
                 Oturum Aç
               </StyledButton>
 
-              <Link 
-                href="#" 
-                variant="body2" 
-                sx={{ 
-                  textAlign: 'center',
-                  color: '#fff',
-                  textDecoration: 'none',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  }
-                }}
-              >
-                Parolanızı mı unuttunuz?
-              </Link>
+             
             </Box>
           </StyledCard>
         </Box>
-      </PageContainer>
+    
+        <footer>
+        <p>
+          &copy; {new Date().getFullYear()} Artes de ilusion. Tüm hakları saklıdır.
+        </p>
+      </footer>  </PageContainer>
+    
     </div>
   );
 }

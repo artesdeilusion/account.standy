@@ -1,20 +1,24 @@
 import "@/app/globals.css";
 import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase'; // Adjust the import path as needed
+import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router'; // Assuming you're using Next.js
 import { User } from 'firebase/auth'; // Firebase User type import
 import {
     fetchSubscriptionDetails,
-     fetchPaymentHistory,
-     deleteUserData
-} from './api/api'; // Adjust path as needed
-import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, } from "@mui/icons-material";
+    updateUserProfile,
+    updatePaymentCard,
+    fetchPaymentHistory,
+    changePassword,
+    purchaseSubscription,
+    deleteUserData
+} from '@/pages/api/api'; // Adjust path as needed
+import { CreditCard, Payment, Person, Lock, Refresh, Settings, AccountCircle, DeleteForever, Discount, NextPlan, ArrowForward, Close, Edit, Subscript, Subscriptions, Payments, Help, HelpOutline, LockOutlined, DiscountOutlined, PaymentOutlined, PaymentsOutlined, EditOff, EditOutlined, CloseOutlined } from "@mui/icons-material";
 import Navbar from "@/components/navbar";
-import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText, CircularProgress } from '@mui/material';
+import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import Footer from "@/components/footer";
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 const StyledCard = styled(Card)({
   backgroundColor: '#313031',
@@ -42,7 +46,9 @@ const SectionTitle = styled(Typography)({
 
 const Home: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
-     const [loading, setLoading] = useState(true);
+    const [subscription, setSubscription] = useState<any>(null);
+    const [paymentHistory, setPaymentHistory] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
@@ -63,7 +69,8 @@ const Home: React.FC = () => {
     const loadSubscriptionDetails = async (uid: string) => {
         try {
             const subscriptionData = await fetchSubscriptionDetails(uid);
-         } catch (error) {
+            setSubscription(subscriptionData);
+        } catch (error) {
             console.error("Failed to load subscription details:", error);
             setError("Unable to load subscription details.");
         }
@@ -72,20 +79,42 @@ const Home: React.FC = () => {
     const loadPaymentHistory = async (uid: string) => {
         try {
             const history = await fetchPaymentHistory(uid);
-         } catch (error) {
+            setPaymentHistory(Array.isArray(history) ? history : []);
+        } catch (error) {
             console.error("Failed to load payment history:", error);
             setError("Unable to load payment history.");
         }
     };
 
- 
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            router.push('/login');
+        } catch (error) {
+            console.error("Error logging out:", error);
+            setError("Logout failed. Please try again.");
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        if (user) {
+            try {
+                await deleteUserData(user.uid);
+                await user.delete();
+                alert("Account deleted successfully!");
+                router.push('/');
+            } catch (error) {
+                console.error("Failed to delete account:", error);
+                setError("Unable to delete account. Please try again.");
+            }
+        }
+    };
+
     const navigateToPage = (path: string) => {
         router.push(path);
     };
 
-    if (loading) return <div className="h-screen flex items-center justify-center">
-        <CircularProgress sx={{ color: 'white' }} />
-    </div>;
+    if (loading) return <p>Loading user information...</p>;
 
     return (
         <div className="bg-[#121212]">
@@ -135,7 +164,7 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                                         variant="contained"
                                         onClick={() => navigateToPage('/payment/premium')}
                                     >
-                                        Standy+&apos;a geç!
+                                        Standy+'a geç!
                                     </PremiumButton>
                                 </Box>
                             </CardContent>
@@ -154,7 +183,43 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                           
                         </List>
                     </StyledCard>
-                     <StyledCard>
+  <StyledCard>
+                        <SectionTitle>Üyelik</SectionTitle>
+                        <List>
+                            
+                            <ListItem component="li" disablePadding onClick={() => navigateToPage('/payment/cards')}  >
+                            <ListItemButton>
+                                <ListItemIcon><PaymentsOutlined sx={{ color: '#fff' }} /></ListItemIcon>
+                                <ListItemText primary="Üyeliği yönet" sx={{ color: '#fff' }} />
+                                 </ListItemButton>
+                            </ListItem>
+                            <ListItem component="li" disablePadding onClick={() => navigateToPage('/payment/cards')}  >
+                            <ListItemButton>
+                                <ListItemIcon><CloseOutlined sx={{ color: '#fff' }} /></ListItemIcon>
+                                <ListItemText primary="Üyeliği iptal et" sx={{ color: '#fff' }} />
+                                 </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </StyledCard>
+                      <StyledCard> 
+                        <SectionTitle>Ödeme</SectionTitle>
+                        <List>
+                            <ListItem disablePadding component="li" onClick={() => navigateToPage('/payment/history')} >
+                            <ListItemButton>
+                                <ListItemIcon><PaymentOutlined sx={{ color: '#fff' }} /></ListItemIcon>
+                                <ListItemText primary="Sipariş geçmişi" sx={{ color: '#fff' }} />
+                                 </ListItemButton>
+                            </ListItem>
+                            <ListItem component="li" disablePadding onClick={() => navigateToPage('/payment/cards')}  >
+                            <ListItemButton>
+                                <ListItemIcon><DiscountOutlined sx={{ color: '#fff' }} /></ListItemIcon>
+                                <ListItemText primary="Kullan" sx={{ color: '#fff' }} />
+                                 </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </StyledCard>  
+                   
+                    <StyledCard>
                         <SectionTitle>Güvenlik ve gizlilik</SectionTitle>
                         <List>
                             <ListItem component="li" disablePadding   onClick={() => navigateToPage('/security/password')}  >
