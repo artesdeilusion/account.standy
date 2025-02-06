@@ -11,19 +11,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/firebase';
-import router from 'next/router';
-import {Person, PersonOutline } from '@mui/icons-material';
+import {PersonOutline } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
 import { Barlow_Condensed } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/dist/client/link';
- 
-const barlowCondensed = Barlow_Condensed({
-  weight: '900', // This is the Black weight
-  subsets: ['latin'],
-});
 
 function StandyAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);

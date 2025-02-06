@@ -9,7 +9,6 @@ import {
     Button,
     Alert,
     CircularProgress,
-    Avatar
 } from '@mui/material';
 import Navbar from '@/components/navbar';
 import { styled } from '@mui/material/styles';

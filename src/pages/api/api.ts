@@ -1,6 +1,7 @@
 import { auth, db } from '@/firebase'; // Ensure the correct path
-import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, updateDoc, deleteDoc } from 'firebase/firestore';
 import { updatePassword } from 'firebase/auth';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // Fetch subscription details
 export const fetchSubscriptionDetails = async (uid: string) => {

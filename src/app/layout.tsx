@@ -1,10 +1,8 @@
-import Navbar from '@/components/navbar';
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import Footer from '@/components/footer';
-
+ 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700', '900'],  // Including various weights
   subsets: ['latin'],

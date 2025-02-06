@@ -6,19 +6,16 @@ import { useRouter } from 'next/router'; // Assuming you're using Next.js
 import { User } from 'firebase/auth'; // Firebase User type import
 import {
     fetchSubscriptionDetails,
-    updateUserProfile,
-    updatePaymentCard,
-    fetchPaymentHistory,
-    changePassword,
-    purchaseSubscription,
-    deleteUserData
+     fetchPaymentHistory,
+     deleteUserData
 } from './api/api'; // Adjust path as needed
-import { CreditCard, Payment, Person, Lock, Refresh, Settings, AccountCircle, DeleteForever, Discount, NextPlan, ArrowForward, Close, Edit, Subscript, Subscriptions, Payments, Help, HelpOutline, LockOutlined, DiscountOutlined, PaymentOutlined, PaymentsOutlined, EditOff, EditOutlined, CloseOutlined } from "@mui/icons-material";
+import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, } from "@mui/icons-material";
 import Navbar from "@/components/navbar";
 import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import Footer from "@/components/footer";
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 const StyledCard = styled(Card)({
   backgroundColor: '#313031',
@@ -164,7 +161,7 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                                         variant="contained"
                                         onClick={() => navigateToPage('/payment/premium')}
                                     >
-                                        Standy+'a geç!
+                                        Standy+&apos;a geç!
                                     </PremiumButton>
                                 </Box>
                             </CardContent>

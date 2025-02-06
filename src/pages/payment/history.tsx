@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { auth } from '@/firebase';
 import {
     Box,
     Typography,
@@ -26,7 +25,8 @@ const PaymentHistory = () => {
     const [payments, setPayments] = useState<PaymentRecord[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    // const [error, setError] = useState<string | null>('Ödeme geçmişi yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+    setError('Ödeme geçmişi yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
     useEffect(() => {
         // Here you would fetch payment history from your backend
         // For now, using mock data

@@ -16,6 +16,7 @@ import {
 import Navbar from '@/components/navbar';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 const StyledCard = styled(Card)({
   backgroundColor: '#313031',

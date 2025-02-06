@@ -9,11 +9,8 @@ import Image from 'next/image';
 import {
   Box,
   Button,
-  Checkbox,
   CssBaseline,
   FormControl,
-  FormControlLabel,
-  FormLabel,
   Link,
   TextField,
   Typography,
@@ -122,7 +119,7 @@ export default function SignIn() {
               </Avatar>
             </Box>
             <Typography component="h1" variant="h4" sx={{ textAlign: 'center', mb: 2 }}>
-              Standy'de oturum aç
+              Standy&apos;de oturum aç
             </Typography>
 
             <Box component="form" onSubmit={handleLogin} noValidate sx={{ display: 'flex', flexDirection: 'column' }}>
