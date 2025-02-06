@@ -3,11 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase'; // Adjust the import path as needed
 import { useRouter } from 'next/router'; // Assuming you're using Next.js
 import { User } from 'firebase/auth'; // Firebase User type import
-import {
-    fetchSubscriptionDetails,
-     fetchPaymentHistory,
-} 
-from './api/api'; // Adjust path as needed
 import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, } from "@mui/icons-material";
 import Navbar from "@/components/navbar";
 import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
@@ -15,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import Footer from "@/components/footer";
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 const StyledCard = styled(Card)({
   backgroundColor: '#313031',
