@@ -92,7 +92,7 @@ const ChangePassword = () => {
                                 Parola Değiştir
                             </Typography>
                             <IconButton
-                                onClick={() => router.back()}
+                                onClick={() => router.push('/')}
                                 sx={{ color: '#fff' }}
                                 aria-label="close"
                             >

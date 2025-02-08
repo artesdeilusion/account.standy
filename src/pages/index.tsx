@@ -111,35 +111,7 @@ const Home: React.FC = () => {
                                 </Box>
                             </CardContent>
                         </StyledCard>
-
-                        <StyledCard sx={{ flex: 2, display: 'flex', alignItems: 'between' }}>
-                            <CardContent sx={{ p: 0, bgcolor: 'rgba(216, 27, 96, 1)', width: '100%' }}>
-                               <Box 
-                                    sx={{ 
-                                        height: '100%',
-                                        borderRadius: 2,
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'start',
-                                        alignItems: 'start',
-                                        gap: 1
-                                    }}
-                                >
-                                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
-                                    </Typography>
-                                     
-                                    <PremiumButton 
-                                    disabled
-                                        variant="contained"
-                                        onClick={() => navigateToPage('/payment/premium')}
-                                    >
-                                        Standy+&apos;a geç!
-                                    </PremiumButton>
-                                </Box>
-                            </CardContent>
-                        </StyledCard>
+ 
                     </Box>
                     <StyledCard>
                         <SectionTitle>Hesap</SectionTitle>
@@ -165,17 +137,7 @@ Ayrıcalıklarla dolu bir deneyim için aramıza katıl!
                                 </ListItemButton>
 
                             </ListItem>
-                            <ListItem 
-                                  
-                                onClick={() => navigateToPage('/account/delete')} 
-                                component="li" disablePadding
-                                sx={{ color: 'red', cursor: 'pointer' }}>
-                                <ListItemButton>
-
-                                <ListItemIcon><DeleteForever sx={{ color: 'red' }} /></ListItemIcon>
-                                <ListItemText primary="Hesabımı Sil" sx={{ color: 'red' }} />
-                                </ListItemButton>
-                                </ListItem>
+                        
                         </List>
                     </StyledCard>
                     <StyledCard>

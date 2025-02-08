@@ -7,12 +7,12 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Link from 'next/link';
 
 import {
   Box,
   Button,
   FormControl,
-
   TextField,
   Typography,
   Stack,
@@ -236,7 +236,25 @@ export default function SignIn() {
                   Oturum Aç
                 </StyledButton>
 
-               
+                <Box sx={{ textAlign: 'center', mt: 2 }}>
+                  <span className='text-white'>
+                    Hesabın yok mu?{' '}
+                    <Box
+                      component={Link}
+                      href="/register" 
+                      sx={{ 
+                        color: '#FFB3C9', 
+                        textDecoration: 'none',
+                        transition: 'text-decoration 0.2s ease',
+                        '&:hover': {
+                          textDecoration: 'underline'
+                        }
+                      }}
+                    >
+                      Kayıt ol
+                    </Box>
+                  </span>
+                </Box>
               </Box>
             </StyledCard>
           </Box>

@@ -80,7 +80,7 @@ const Profile = () => {
                         Profili Düzenle
                     </Typography>
                     <IconButton
-                        onClick={() => router.back()}
+                        onClick={() => router.push('/')}
                         sx={{ color: '#fff' }}
                         aria-label="close"
                     >
