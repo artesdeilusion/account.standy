@@ -236,6 +236,23 @@ export default function SignIn() {
                   Oturum Aç
                 </StyledButton>
 
+                <Box sx={{ textAlign: 'center', mt: 2, mb: 2 }}>
+                    <Box
+                        component={Link}
+                        href="/forgot-password" 
+                        sx={{ 
+                            color: '#FFB3C9', 
+                            textDecoration: 'none',
+                            transition: 'text-decoration 0.2s ease',
+                            '&:hover': {
+                                textDecoration: 'underline'
+                            }
+                        }}
+                    >
+                        Parolanı mı unuttun?
+                    </Box>
+                </Box>
+
                 <Box sx={{ textAlign: 'center', mt: 2 }}>
                   <span className='text-white'>
                     Hesabın yok mu?{' '}
