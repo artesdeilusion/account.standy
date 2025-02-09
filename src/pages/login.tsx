@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Link from 'next/link';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 import {
   Box,
@@ -114,6 +115,20 @@ export default function SignIn() {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailValue)) {
       setEmailError(true);
       setErrorMessage('Geçerli bir e-posta adresi giriniz.');
+      return false;
+    }
+
+    // Check if business user
+    const db = getFirestore();
+    const businessQuery = query(
+      collection(db, 'businesses'),
+      where('email', '==', emailValue)
+    );
+    const businessSnapshot = await getDocs(businessQuery);
+
+    if (!businessSnapshot.empty) {
+      setEmailError(true);
+      setErrorMessage('Bu hesap işletme kullanıcıları içindir.');
       return false;
     }
 

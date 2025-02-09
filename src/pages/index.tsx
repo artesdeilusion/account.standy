@@ -8,7 +8,7 @@ import {
      fetchPaymentHistory,
      deleteUserData
 } from './api/api'; // Adjust path as needed
-import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, } from "@mui/icons-material";
+import {  DeleteForever, HelpOutline, LockOutlined,  EditOutlined, AutoDelete, } from "@mui/icons-material";
 import Navbar from "@/components/navbar";
 import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemIcon, ListItemText, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -96,7 +96,7 @@ const Home: React.FC = () => {
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {user ? (
-                <Box  maxWidth="md" margin="auto" sx={{ paddingTop: '20', padding: '16px' }}>
+                <Box min-h-screen  maxWidth="md" margin="auto" sx={{ paddingTop: '20', padding: '16px' }}>
                     {/* First Card - User Info */}
                     <Box sx={{ display: 'flex', gap: 2, width: '100%' }}>
                         <StyledCard sx={{ flex: 3 }}>
@@ -123,6 +123,14 @@ const Home: React.FC = () => {
                                 <ListItemText primary="Profili düzenle" sx={{ color: '#fff' }} />
                                  </ListItemButton>
                             </ListItem>
+                            <ListItem component="li" disablePadding   onClick={() => navigateToPage('/account/delete')}  >
+                            <ListItemButton>
+
+                                <ListItemIcon><DeleteForever sx={{ color: '#fff' }} /></ListItemIcon>
+                                <ListItemText primary="Nasıl hesabımı silebilirim?" sx={{ color: '#fff' }} />
+                                </ListItemButton>
+
+                            </ListItem>
                           
                         </List>
                     </StyledCard>
@@ -137,6 +145,7 @@ const Home: React.FC = () => {
                                 </ListItemButton>
 
                             </ListItem>
+                          
                         
                         </List>
                     </StyledCard>
